@@ -76,17 +76,23 @@
                     CssClass="text-danger" Display="Dynamic" ErrorMessage="Le mot de passe et le mot de passe de confirmation ne correspondent pas." />
             </div>
         </div>
-        <div >
-            <input type="checkbox" runat="server" ID="chkAccepterConditions" />
+        <div>
+            <input type="checkbox" runat="server" id="chkAccepterConditions" />
             <label class="form-check-label" for="chkAccepterConditions">J'accepte les conditions d'utilisation</label>
-            <asp:CustomValidator runat="server" ID="cvAccepterConditions" 
-                CssClass="text-danger" Display="Dynamic" ErrorMessage="Vous devez accepter les conditions d'utilisation."
-                OnServerValidate="cvAccepterConditions_ServerValidate" />
+            <%--<asp:CustomValidator runat="server" ID="cvAccepterConditions"
+                CssClass="text-danger" Display="Dynamic" ErrorMessage=""
+                OnServerValidate="cvAccepterConditions_ServerValidate" />--%>
+            <asp:RequiredFieldValidator
+                ID="RequiredFieldValidator"
+                ControlToValidate="chkAccepterConditions"
+                Display="Dynamic"
+                ErrorMessage="Vous devez accepter les conditions d'utilisation."
+                runat="server" />
         </div>
         <div class="row">
             <div class="offset-md-2 col-md-10">
-        <asp:Button runat="server" OnClick="CreateUser_Click" Text="Inscrire" CssClass="btn btn-outline-dark" CausesValidation="True" />
-    </div>
+                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Inscrire" CssClass="btn btn-outline-dark" CausesValidation="True" />
+            </div>
         </div>
     </main>
 </asp:Content>

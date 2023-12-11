@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
+using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -14,6 +17,8 @@ namespace SportAssoASP.Account
 {
     public partial class Manage : System.Web.UI.Page
     {
+        string connectionString = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
         protected string SuccessMessage
         {
             get;
@@ -25,24 +30,13 @@ namespace SportAssoASP.Account
             return manager.HasPassword(User.Identity.GetUserId());
         }
 
-        public bool HasPhoneNumber { get; private set; }
-
-        public bool TwoFactorEnabled { get; private set; }
-
-        public bool TwoFactorBrowserRemembered { get; private set; }
-
         public int LoginsCount { get; set; }
 
         protected void Page_Load()
         {
+            GetUserInscritption();
+
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
-            HasPhoneNumber = String.IsNullOrEmpty(manager.GetPhoneNumber(User.Identity.GetUserId()));
-
-            // Activer ceci après la configuration de l'authentification à 2 facteurs
-            //PhoneNumber.Text = manager.GetPhoneNumber(User.Identity.GetUserId()) ?? String.Empty;
-
-            TwoFactorEnabled = manager.GetTwoFactorEnabled(User.Identity.GetUserId());
 
             LoginsCount = manager.GetLogins(User.Identity.GetUserId()).Count;
 
@@ -57,7 +51,6 @@ namespace SportAssoASP.Account
                 }
                 else
                 {
-                    CreatePassword.Visible = true;
                     ChangePassword.Visible = false;
                 }
 
@@ -70,59 +63,52 @@ namespace SportAssoASP.Account
 
                     SuccessMessage =
                         message == "ChangePwdSuccess" ? "Votre mot de passe a été changé."
-                        : message == "SetPwdSuccess" ? "Votre mot de passe a été défini."
-                        : message == "RemoveLoginSuccess" ? "Le compte a été supprimé."
-                        : message == "AddPhoneNumberSuccess" ? "Le numéro de téléphone a été ajouté"
-                        : message == "RemovePhoneNumberSuccess" ? "Le numéro de téléphone a été supprimé"
                         : String.Empty;
                     successMessage.Visible = !String.IsNullOrEmpty(SuccessMessage);
                 }
             }
         }
 
+        protected void GetUserInscritption()
+        {  
+            int userId = Adherent.GetUserID(Context.User.Identity.GetUserName());
 
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                ModelState.AddModelError("", error);
+                // Ouvrir la connexion
+                connection.Open();
+
+                // Créer une commande SQL avec le paramètre
+                string queryString = "SELECT A.ActiviteID, A.Sport, A.Section, A.Jour, A.Heure, A.Capacite_max, A.Prix " +
+                    "FROM Activites A JOIN Inscription I ON A.ActiviteID = I.ActiviteID " +
+                    "JOIN Adherents Adh ON I.AdherentID = Adh.AdherentID WHERE Adh.AdherentID = @AdherentID";
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    // Ajouter le paramètre
+                    command.Parameters.AddWithValue("@AdherentID", userId);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            
+                            MesInscriptions.DataSource = reader;
+                            MesInscriptions.DataBind();
+                        }
+                    }
+                }
+
+                // Fermer la connexion en dehors du bloc using(SqlCommand...)
+                connection.Close();
             }
+            string[] userInfo = Adherent.GetUserInfo(userId);
+            Nom.Text = userInfo[1];
+            Prenom.Text = userInfo[2];
+            Email.Text = userInfo[3];
+            Tel.Text = userInfo[5];
+            Adresse.Text = userInfo[6];
+
         }
 
-        // Supprimer le numéro de téléphone de l'utilisateur
-        protected void RemovePhone_Click(object sender, EventArgs e)
-        {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            var result = manager.SetPhoneNumber(User.Identity.GetUserId(), null);
-            if (!result.Succeeded)
-            {
-                return;
-            }
-            var user = manager.FindById(User.Identity.GetUserId());
-            if (user != null)
-            {
-                signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
-                Response.Redirect("/Account/Manage?m=RemovePhoneNumberSuccess");
-            }
-        }
-
-        // DisableTwoFactorAuthentication
-        protected void TwoFactorDisable_Click(object sender, EventArgs e)
-        {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            manager.SetTwoFactorEnabled(User.Identity.GetUserId(), false);
-
-            Response.Redirect("/Account/Manage");
-        }
-
-        //EnableTwoFactorAuthentication 
-        protected void TwoFactorEnable_Click(object sender, EventArgs e)
-        {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            manager.SetTwoFactorEnabled(User.Identity.GetUserId(), true);
-
-            Response.Redirect("/Account/Manage");
-        }
     }
 }

@@ -11,6 +11,7 @@ using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using SportAssoASP.Models;
 using Stripe;
 using Stripe.Terminal;
 
@@ -58,7 +59,6 @@ namespace SportAssoASP
                                 string section = reader["Section"].ToString();
                                 string prix = reader["Prix"].ToString();
 
-
                                 RecapJour.Text = jour;
                                 RecapHeure.Text = heure;
                                 RecapSection.Text = section;
@@ -85,7 +85,6 @@ namespace SportAssoASP
         // Attention plus d'exension (mais ça s'affiche quand meme sur mozilla"
         protected string HandleFileUpload(FileUpload fileUploadControl, Label StatusLabel, string filetype)
         {
-
             if (fileUploadControl.HasFile)
             {
                 try
@@ -112,7 +111,7 @@ namespace SportAssoASP
                             //string fileName = Path.GetFileName(fileUploadControl.FileName);
                             
                             // Construisez le chemin complet du fichier sur le serveur
-                            string userid = GetUserID().ToString();
+                            string userid = Adherent.GetUserID(Context.User.Identity.GetUserName()).ToString();
                             string actId = Request.QueryString["activiteID"];
 
                             string NameBD = $"{filetype}_{userid}_{actId}{extension}";
@@ -167,27 +166,36 @@ namespace SportAssoASP
         {
             try
             {
-                // Vérifiez que les champs contiennent des valeurs non vides
-                if (!string.IsNullOrEmpty(NumeroCarte.Text) && !string.IsNullOrEmpty(MoisExpiration.Text) && !string.IsNullOrEmpty(AnneeExpiration.Text) && !string.IsNullOrEmpty(CVC.Text))
+                if (long.TryParse(NumeroCarte.Text, out long result1) && NumeroCarte.Text.Length == 16 && int.TryParse(CVC.Text, out int result2) && CVC.Text.Length == 3)
                 {
+                    // Vérifiez que les champs contiennent des valeurs non vides
+                    if (!string.IsNullOrEmpty(MoisExpiration.SelectedValue) && !string.IsNullOrEmpty(AnneeExpiration.SelectedValue))
+                    {
 
-                    // Enregistrez les informations dans la base de données
-                    EnregistrerDansLaBaseDeDonnees();
+                        // Enregistrez les informations dans la base de données
+                        EnregistrerDansLaBaseDeDonnees();
 
-                    // Affichez un message de réussite
-                    Message.Text = "Informations de carte enregistrées avec succès!";
+                        // Affichez un message de réussite
+                        Message.Text = "Inscription effectuée avec avec succès! Veillez à fournir les documents nécessaire si ce n'est pas fait";
+                    }
+                    else
+                    {
+                        // Les valeurs ne sont pas valides, affichez un message d'erreur
+                        Message.Text = "Veuillez remplir tous les champs du formulaire.";
+                    }
                 }
                 else
                 {
-                    // Les valeurs ne sont pas valides, affichez un message d'erreur
-                    Message.Text = "Veuillez remplir tous les champs du formulaire.";
+                    Message.Text = "Informations de carte incorrect";
                 }
+                    
             }
             catch (Exception ex)
             {
                 // Affichez le message d'erreur détaillé pour le débogage
                 Message.Text = "Erreur: " + ex.Message;
             }
+
             // REVOIR SI ON A LE TEMPS POUR FAIRE UN TRUC DE PAYEMENT
             //try
             //{
@@ -232,7 +240,7 @@ namespace SportAssoASP
         protected void EnregistrerDansLaBaseDeDonnees()
         {
 
-            int adherent = GetUserID();
+            int adherent = Adherent.GetUserID(Context.User.Identity.GetUserName());
 
             int.TryParse(Request.QueryString["activiteID"], out int activite);
 
@@ -262,44 +270,6 @@ namespace SportAssoASP
                 Message.Text = "Informations de carte enregistrées avec succès!";
             }
         }
-
-        protected int GetUserID()
-        {
-            string userName = Context.User.Identity.GetUserName();
-            int adherentID = 0;
-            string readIdAsString = string.Empty;
-
-
-            // Code pour insérer les informations dans la base de données
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                // Ouvrir la connexion
-                connection.Open();
-
-                // Créer une commande SQL avec le paramètre
-                string queryString = "SELECT AdherentID From Adherents WHERE Adherents.Email = @Email";
-                using (SqlCommand command = new SqlCommand(queryString, connection))
-                {
-                    // Ajouter le paramètre
-                    command.Parameters.AddWithValue("@Email", userName);
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            // Vous pouvez accéder aux colonnes de la table Adherents ici
-                            readIdAsString = reader["AdherentID"].ToString();
-                        }
-                    }
-                }
-
-                // Fermer la connexion en dehors du bloc using(SqlCommand...)
-                connection.Close();
-            }
-            int.TryParse(readIdAsString, out adherentID);
-            return adherentID;
-        }
-
 
     }
 }

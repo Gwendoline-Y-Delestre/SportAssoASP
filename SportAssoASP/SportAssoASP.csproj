@@ -458,6 +458,7 @@
       <DependentUpon>Inscription.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Adherent.cs" />
+    <Compile Include="Models\AdherentsAdmin.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Planning.aspx.cs">
       <DependentUpon>Planning.aspx</DependentUpon>

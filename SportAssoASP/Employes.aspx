@@ -5,7 +5,6 @@
         <asp:BoundField DataField="Nom" HeaderText="Nom" />
         <asp:BoundField DataField="Prenom" HeaderText="Prenom" />
         <asp:BoundField DataField="Email" HeaderText="Email" />
-        <asp:BoundField DataField="Tel" HeaderText="Tel"  />
 
     </Columns>
 </asp:GridView>

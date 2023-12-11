@@ -179,8 +179,6 @@
             <asp:BoundColumn DataField="Section" HeaderText="Section" />
             <asp:BoundColumn DataField="Jour" HeaderText="Jour" />
             <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
-            <asp:BoundColumn DataField="Capacite_max" HeaderText="Capacite max" />
-            <asp:BoundColumn DataField="Prix" HeaderText="Prix" />
             <asp:BoundColumn DataField="EmployeID" HeaderText="EmployeID" />
         </Columns>
     </asp:DataGrid>

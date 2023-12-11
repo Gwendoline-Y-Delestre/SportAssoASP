@@ -18,7 +18,7 @@
         <asp:FileUpload ID="Accord" runat="server" />
         <asp:Label ID="StatusLabel3" runat="server" Text=""></asp:Label>
 
-        <asp:Button ID="BtnUpload" runat="server" Text="Porcéder au paiement" OnClick="Afficher_Paiement" />
+        <asp:Button ID="BtnUpload" runat="server" Text="Procéder au paiement" OnClick="Afficher_Paiement" />
 
         <asp:Label ID="InformationFichier" runat="server" Text=""></asp:Label>
 

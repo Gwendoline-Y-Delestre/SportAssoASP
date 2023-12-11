@@ -42,10 +42,11 @@
             <div style="display: inline">
                 <div>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
+
                         <AnonymousTemplate>
                             <ul style="display: inline; list-style-type: none;">
-                                <li style="float: right"><a runat="server" href="~/Account/Register">S’inscrire</a></li>
-                                <li style="float: right"><a runat="server" href="~/Account/Login">Se connecter</a></li>
+                                <li class="btn-nav"><a runat="server" href="~/Account/Register">S’inscrire</a></li>
+                                <li class="btn-nav"><a runat="server" href="~/Account/Login">Se connecter</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>

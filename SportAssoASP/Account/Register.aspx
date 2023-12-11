@@ -82,12 +82,7 @@
             <%--<asp:CustomValidator runat="server" ID="cvAccepterConditions"
                 CssClass="text-danger" Display="Dynamic" ErrorMessage=""
                 OnServerValidate="cvAccepterConditions_ServerValidate" />--%>
-            <asp:RequiredFieldValidator
-                ID="RequiredFieldValidator"
-                ControlToValidate="chkAccepterConditions"
-                Display="Dynamic"
-                ErrorMessage="Vous devez accepter les conditions d'utilisation."
-                runat="server" />
+            
         </div>
         <div class="row">
             <div class="offset-md-2 col-md-10">

@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <section id="loginForm">
                 <div class="row">
-                    <h4>Connectez-vous à l'aide d'un compte local.</h4>
+                    <h4>Connectez-vous :</h4>
                     <hr />
                     <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
                         <p class="text-danger">
@@ -44,21 +44,21 @@
                         </div>
                     </div>
                 </div>
-                <p>
+                <%--<p>
                     <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled">Inscrire comme nouvel utilisateur</asp:HyperLink>
-                </p>
-                <p>
-                    <%-- Enable this once you have account confirmation enabled for password reset functionality
+                </p>--%>
+                <%--<p>
+                     Enable this once you have account confirmation enabled for password reset functionality
                     <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" ViewStateMode="Disabled">Forgot your password?</asp:HyperLink>
-                    --%>
-                </p>
+                    
+                </p>--%>
             </section>
         </div>
 
-        <div class="col-md-4">
+        <%--<div class="col-md-4">
             <section id="socialLoginForm">
                 <uc:OpenAuthProviders runat="server" ID="OpenAuthLogin" />
             </section>
-        </div>
+        </div>--%>
     </main>
 </asp:Content>

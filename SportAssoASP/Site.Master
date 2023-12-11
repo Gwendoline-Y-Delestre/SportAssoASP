@@ -42,7 +42,6 @@
             <div style="display: inline">
                 <div>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
-
                         <AnonymousTemplate>
                             <ul style="display: inline; list-style-type: none;">
                                 <li style="float: right"><a runat="server" href="~/Account/Register">S’inscrire</a></li>

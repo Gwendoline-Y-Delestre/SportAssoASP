@@ -44,6 +44,8 @@
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
 
                         <AnonymousTemplate>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
                             <ul style="display: inline; list-style-type: none;">
                                 <li style="float: right"><a runat="server" href="~/Planning">Planning</a></li>
                                 <li style="float: right"><a runat="server" href="~/Employes">Employes</a></li>
@@ -52,8 +54,6 @@
 
 
                             </ul>
-                        </AnonymousTemplate>
-                        <LoggedInTemplate>
                             <ul style="display: flex; list-style-type: none; right: 0px;">
                                 <li><a runat="server" href="~/Account/Manage" id="NomLabel" title="Gérer mon compte">Mon Compte  <%: Context.User.Identity.GetUserName()  %> </a></li>
                                 <li>

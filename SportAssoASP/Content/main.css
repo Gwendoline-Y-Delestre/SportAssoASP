@@ -108,4 +108,20 @@ p {
     height: 5px;
     background-color: black;
     margin: 6px 0;
+    justify-content: center;
+}
+.btn-nav:hover {
+    opacity: 0.4;
+    float: right;
+    margin: 1%;
+    padding: 1%;
+    border: solid 1px black;
+    border-radius: 10px
+}
+.btn-nav {
+    float: right;
+    margin: 1%;
+    padding: 1%;
+    border: solid 1px black;
+    border-radius: 10px
 }

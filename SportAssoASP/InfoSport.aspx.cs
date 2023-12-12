@@ -133,9 +133,6 @@ namespace SportAssoASP
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.HasRows)
                     {
-                        
-                        ErrorMessage.Text = "Nombre de lignes dans le résultat : " + reader.FieldCount;
-
                         return true;
                     }
                     else

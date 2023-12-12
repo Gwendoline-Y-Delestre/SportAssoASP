@@ -32,7 +32,8 @@ namespace SportAssoASP
             {
                 CapMaxOk.Visible = false;
                 CapMaxDépassé.Visible = true;
-            }else InfoInscription();
+            }
+            else InfoInscription();
 
         }
 
@@ -50,7 +51,7 @@ namespace SportAssoASP
                     " FROM Activites A " +
                     "LEFT JOIN Inscription I ON A.ActiviteID = I.ActiviteID " +
                     "WHERE A.ActiviteID = @ActiviteID GROUP BY  A.Capacite_max";
-                    
+
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
                     // Ajouter le paramètre
@@ -63,7 +64,7 @@ namespace SportAssoASP
                             // Vous pouvez accéder aux colonnes de la table Adherents ici
                             nbInscriptionCapMax[0] = int.Parse(reader["Capacite_max"].ToString());
                             nbInscriptionCapMax[1] = int.Parse(reader["NombreInscriptions"].ToString());
-                           
+
                         }
                     }
                 }
@@ -87,7 +88,7 @@ namespace SportAssoASP
                     connection.Open();
 
                     // Créer une commande SQL avec le paramètre
-                    string queryString = "SELECT ActiviteID, Section, Jour, Heure, Prix  FROM Activites WHERE ActiviteID = @ActiviteID";
+                    string queryString = "SELECT ActiviteID, Sport, Section, Jour, Heure, Prix  FROM Activites WHERE ActiviteID = @ActiviteID";
                     using (SqlCommand command = new SqlCommand(queryString, connection))
                     {
                         // Ajouter le paramètre
@@ -99,12 +100,12 @@ namespace SportAssoASP
                         {
                             while (reader.Read())
                             {
-                                // Accéder aux colonnes des résultats
+                                string sport = reader["Sport"].ToString();
                                 string jour = reader["Jour"].ToString();
                                 string heure = reader["Heure"].ToString();
                                 string section = reader["Section"].ToString();
                                 string prix = reader["Prix"].ToString();
-
+                                RecapSport.Text = sport;
                                 RecapJour.Text = jour;
                                 RecapHeure.Text = heure;
                                 RecapSection.Text = section;
@@ -126,7 +127,7 @@ namespace SportAssoASP
             HandleFileUpload(Certificat, StatusLabel2, "certificat");
             HandleFileUpload(Accord, StatusLabel3, "accord");
 
-            if (Session["AssurancePath"] == null || Session["CertificatPath"] == null || Session["AccordPath"] == null)
+            if (Session["AssurancePath"] == null || Session["CertificatPath"] == null )
             {
                 InformationFichier.Text = "Veuillez fournir tous les documents nécessaires avant de procéder au paiement.";
                 return;
@@ -159,10 +160,8 @@ namespace SportAssoASP
                                 Directory.CreateDirectory(uploadFolder);
                             }
 
-                            // Obtenez le nom du fichier
-                            //string fileName = Path.GetFileName(fileUploadControl.FileName);
-                            
-                            // Construisez le chemin complet du fichier sur le serveur
+                           
+                            // chemin complet du fichier sur le serveur
                             string userid = Adherent.GetUserID(Context.User.Identity.GetUserName()).ToString();
                             string actId = Request.QueryString["activiteID"];
 
@@ -220,27 +219,18 @@ namespace SportAssoASP
             {
                 if (long.TryParse(NumeroCarte.Text, out long result1) && NumeroCarte.Text.Length == 16 && int.TryParse(CVC.Text, out int result2) && CVC.Text.Length == 3)
                 {
-                    // Vérifiez que les champs contiennent des valeurs non vides
-                    //if (!string.IsNullOrEmpty(MoisExpiration.SelectedValue) && !string.IsNullOrEmpty(AnneeExpiration.SelectedValue))
-                    //{
 
-                        // Enregistrez les informations dans la base de données
-                        EnregistrerDansLaBaseDeDonnees();
+                    EnregistrerDansLaBaseDeDonnees();
 
-                        // Affichez un message de réussite
-                        Message.Text = "Inscription effectuée avec succès! ";
-                    //}
-                    //else
-                    //{
-                    //    // Les valeurs ne sont pas valides, affichez un message d'erreur
-                    //    Message.Text = "Veuillez remplir tous les champs du formulaire.";
-                    //}
+                    // Affichez un message de réussite
+                    Message.Text = "Inscription effectuée avec succès! ";
+
                 }
                 else
                 {
                     Message.Text = "Informations de carte incorrect";
                 }
-                    
+
             }
             catch (Exception ex)
             {
@@ -319,7 +309,8 @@ namespace SportAssoASP
                 }
                 connection.Close();
                 // Affichez un message de réussite
-                Message.Text = "Informations de carte enregistrées avec succès!";
+                Message.Text = "Payement effectué avec succès!";
+                Response.Redirect("~/Account/Manage.aspx");
             }
         }
 

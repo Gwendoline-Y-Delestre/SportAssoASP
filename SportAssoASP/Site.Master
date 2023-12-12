@@ -39,10 +39,9 @@
         </asp:ScriptManager>
 
         <nav>
-            <div style="display: inline">
-                <div>
+            <div id="nav">
+                <div class="right" >
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
-
                         <AnonymousTemplate>
                             <ul style="display: inline; list-style-type: none;">
                                 <li class="btn-nav"><a runat="server" href="~/Account/Register">S’inscrire</a></li>
@@ -50,7 +49,7 @@
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
-                            <ul style="display: flex; list-style-type: none; right: 0px;">
+                            <ul style="display: inline; list-style-type: none; right: 0px;">
                                 <li class="btn-nav"><a runat="server" href="~/Account/Manage" id="NomLabel" title="Gérer mon compte">Mon Compte</a></li>
                                 <li class="btn-nav">
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Se déconnecter" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
@@ -62,7 +61,7 @@
                 <div id="mySidenav" class="sidenav">
                     <%--<h4>SportAsso</h4>--%>
 
-                    <a id="closeBtn" href="#" class="close">×</a>
+                    <a id="closeBtn" href="#side" class="close">×</a>
                     <ul id="ulInd">
                         <li><a runat="server" href="Default.aspx">Accueil</a></li>
                         <li><a runat="server" href="~/InfoSport.aspx?sport=Basketball">Basketball</a></li>
@@ -75,29 +74,25 @@
                         <li><a runat="server" href="~/InfoSport.aspx?sport=Natation">Natation</a></li>
                         <li><a runat="server" href="~/InfoSport.aspx?sport=Gymnastique">Gymnastique</a></li>
                     </ul>
-
                 </div>
-                <a href="#" id="openBtn">
-                    <span class="burger-icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-                </a>
+                <div style="max-width: 100px">
+                    <a href="#side" id="openBtn">
+                        <span class="burger-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </a>
+                </div>
+
             </div>
         </nav>
         <div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
-            <%--<footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Mon application ASP.NET</p>
-            </footer>--%>
         </div>
     </form>
-    <%--<asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
-    </asp:PlaceHolder>--%>
+
     <script src="Scripts/main.js"></script>
 </body>
 </html>

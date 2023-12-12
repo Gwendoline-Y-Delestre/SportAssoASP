@@ -5,181 +5,101 @@
         <asp:Literal runat="server" ID="ErreurMessage" />
     </p>
     <div id="calendar">
-        <%--<table runat="server">
-            <tr>
-                <td>
-                    <br />
-                    Heure/Jour
-                </td>
-                <td>Lundi</td>
-                <td>Mardi</td>
-                <td>Mercredi</td>
-                <td>Jeudi</td>
-                <td>Vendredi</td>
-                <td>Samedi</td>
-                <td>Dimanche</td>
-            </tr>
-            <tr>
-                <td>8h00</td>
-                <td>></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>9h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>10h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>11h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>12h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>13h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>14h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>15h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>16h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>17h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>18h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>19h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>20h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>21h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>22h00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>--%>
+        <div class="row3">
+            <div id="lundi" class="jourSemaine">
+                <h4>Lundi</h4>
+                <asp:DataGrid ID="GridLundi" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundColumn DataField="Sport" HeaderText="Sport" />
+                        <asp:BoundColumn DataField="Section" HeaderText="Section" />
+                        <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
+                        <asp:BoundColumn DataField="NomPrenom" HeaderText="Entraineur" />
+                    </Columns>
+                </asp:DataGrid>
+            </div>
+            <div id="mardi" class="jourSemaine">
+                <h4>Mardi</h4>
+                <asp:DataGrid ID="GridMardi" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundColumn DataField="Sport" HeaderText="Sport" />
+                        <asp:BoundColumn DataField="Section" HeaderText="Section" />
+                        <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
+                        <asp:BoundColumn DataField="NomPrenom" HeaderText="Entraineur" />
+                    </Columns>
+                </asp:DataGrid>
+            </div>
+            <div id="mercredi" class="jourSemaine">
+                <h4>Mercredi</h4>
+                <asp:DataGrid ID="GridMercredi" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundColumn DataField="Sport" HeaderText="Sport" />
+                        <asp:BoundColumn DataField="Section" HeaderText="Section" />
+                        <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
+                        <asp:BoundColumn DataField="NomPrenom" HeaderText="Entraineur" />
+                    </Columns>
+                </asp:DataGrid>
+            </div>
+        </div>
+        <div class="row3" id="colonne2">
+            <div id="jeudi" class="jourSemaine">
+                <h4>Jeudi</h4>
+                <asp:DataGrid ID="GridJeudi" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundColumn DataField="Sport" HeaderText="Sport" />
+                        <asp:BoundColumn DataField="Section" HeaderText="Section" />
+                        <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
+                        <asp:BoundColumn DataField="NomPrenom" HeaderText="Entraineur" />
+                    </Columns>
+                </asp:DataGrid>
+            </div>
+            <div id="vendredi" class="jourSemaine">
+                <h4>Vendredi</h4>
+                <asp:DataGrid ID="GridVendredi" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundColumn DataField="Sport" HeaderText="Sport" />
+                        <asp:BoundColumn DataField="Section" HeaderText="Section" />
+                        <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
+                        <asp:BoundColumn DataField="NomPrenom" HeaderText="Entraineur" />
+                    </Columns>
+                </asp:DataGrid>
+            </div>
+            <div id="samedi" class="jourSemaine">
+                <h4>Samedi</h4>
+                <asp:DataGrid ID="GridSamedi" runat="server" AutoGenerateColumns="false">
+                    <Columns>
+                        <asp:BoundColumn DataField="Sport" HeaderText="Sport" />
+                        <asp:BoundColumn DataField="Section" HeaderText="Section" />
+                        <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
+                        <asp:BoundColumn DataField="NomPrenom" HeaderText="Entraineur" />
+                    </Columns>
+                </asp:DataGrid>
+            </div>
+        </div>
+
+        <div id="dimanche" class="jourSemaine">
+            <h4>Dimanche</h4>
+            <asp:DataGrid ID="GridDimanche" runat="server" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:BoundColumn DataField="Sport" HeaderText="Sport" />
+                    <asp:BoundColumn DataField="Section" HeaderText="Section" />
+                    <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
+                    <asp:BoundColumn DataField="NomPrenom" HeaderText="Entraineur" />
+                </Columns>
+            </asp:DataGrid>
+        </div>
+
+
+
     </div>
 
 
-    <asp:DataGrid ID="DataGrid" runat="server" BorderWidth="1" GridLines="Both" AutoGenerateColumns="false">
+    <%--<asp:DataGrid ID="DataGrid" runat="server" AutoGenerateColumns="false">
         <Columns>
-            <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
+            <asp:BoundColumn DataField="Sport" HeaderText="Sport" />
             <asp:BoundColumn DataField="Section" HeaderText="Section" />
             <asp:BoundColumn DataField="Jour" HeaderText="Jour" />
             <asp:BoundColumn DataField="Heure" HeaderText="Heure" />
-            <asp:BoundColumn DataField="EmployeID" HeaderText="EmployeID" />
+            <asp:BoundColumn DataField="NomPrenom" HeaderText="Entraineur" />
         </Columns>
-    </asp:DataGrid>
+    </asp:DataGrid>--%>
 </asp:Content>

@@ -473,6 +473,7 @@
     <Compile Include="Models\Adherent.cs" />
     <Compile Include="Models\AdherentsAdmin.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InscriptionData.cs" />
     <Compile Include="NewActivite.aspx.cs">
       <DependentUpon>NewActivite.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

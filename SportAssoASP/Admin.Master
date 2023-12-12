@@ -39,24 +39,23 @@
         </asp:ScriptManager>
 
         <nav>
-            <div style="display: inline">
-                <div>
+            <div>
+                <div style="max-width:none">
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
 
                         <AnonymousTemplate>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
-                            <ul style="display: inline; list-style-type: none;">
-                                <li style="float: right"><a runat="server" href="~/Planning">Planning</a></li>
-                                <li style="float: right"><a runat="server" href="~/Employes">Employes</a></li>
-                                <li style="float: right"><a runat="server" href="~/Adherents">Adherents</a></li>
-                                <li style="float: right"><a runat="server" href="~/Activites">Activites</a></li>
-
-
+                            
+                            <ul class="ulAdm">
+                                <li class="btn-nav" ><a runat="server" href="~/Planning">Planning</a></li>
+                                <li class="btn-nav"><a runat="server" href="~/Employes">Employes</a></li>
+                                <li class="btn-nav"><a runat="server" href="~/Adherents">Adherents</a></li>
+                                <li class="btn-nav"><a runat="server" href="~/Activites">Activites</a></li>
                             </ul>
-                            <ul style="display: flex; list-style-type: none; right: 0px;">
-                                <li><a runat="server" href="~/Account/Manage" id="NomLabel" title="Gérer mon compte">Mon Compte  <%: Context.User.Identity.GetUserName()  %> </a></li>
-                                <li>
+                            <ul class=" right">
+                                <li class="btn-nav"><a runat="server" href="~/Account/ManageAdmin" id="NomLabel" title="Gérer mon compte"> Compte Administrateur </a></li>
+                                <li class="btn-nav">
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Se déconnecter" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
                             </ul>

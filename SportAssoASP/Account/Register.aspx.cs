@@ -99,23 +99,23 @@ namespace SportAssoASP.Account
             string birthdate = BirthDate.Text;
             string password = Password.Text;
             string adresse = Adresse.Text;
-            
+
             int tel;
             // Vérifiez si le numéro de téléphone est valide
             if (!int.TryParse(Tel.Text, out tel))
             {
                 lblError.Text = "Veuillez entrer un numéro de téléphone valide.";
                 return;
-            }           
-            
+            }
+
             string insertQuery = "INSERT INTO Adherents (Nom, Prenom, Date_naissance, Email, Tel, Adresse, Contact_urgenceID, Mot_de_passe) " +
             "VALUES (@Nom, @Prenom, @Date_naissance, @Email, @Tel, @Adresse, @Contact_urgenceID, @Mot_de_passe)";
-            
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-              
+
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
                     {
                         // Paramètres

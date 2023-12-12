@@ -45,6 +45,7 @@ namespace SportAssoASP.Account
             if (!IsPostBack)
             {
                 // Déterminer les sections à afficher
+               
                 if (HasPassword(manager))
                 {
                     ChangePassword.Visible = true;
@@ -70,30 +71,38 @@ namespace SportAssoASP.Account
         }
 
         protected void GetUserInscritption()
-        {  
+        {
             int userId = Adherent.GetUserID(Context.User.Identity.GetUserName());
+            List<InscriptionData> inscriptionDataList = new List<InscriptionData>();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // Ouvrir la connexion
                 connection.Open();
 
-                // Créer une commande SQL avec le paramètre
                 string queryString = "SELECT A.ActiviteID, A.Sport, A.Section, A.Jour, A.Heure, A.Capacite_max, A.Prix " +
                     "FROM Activites A JOIN Inscription I ON A.ActiviteID = I.ActiviteID " +
                     "JOIN Adherents Adh ON I.AdherentID = Adh.AdherentID WHERE Adh.AdherentID = @AdherentID";
                 using (SqlCommand command = new SqlCommand(queryString, connection))
                 {
-                    // Ajouter le paramètre
                     command.Parameters.AddWithValue("@AdherentID", userId);
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        while (reader.Read())
                         {
-                            
-                            MesInscriptions.DataSource = reader;
-                            MesInscriptions.DataBind();
+                            // Ajouter les données à la liste
+                            InscriptionData inscriptionData = new InscriptionData
+                            {
+                                ActiviteID = Convert.ToInt32(reader["ActiviteID"]),
+                                Sport = reader["Sport"].ToString(),
+                                Section = reader["Section"].ToString(),
+                                Jour = reader["Jour"].ToString(),
+                                Heure = reader["Heure"].ToString(),
+                                Capacite_max = Convert.ToInt32(reader["Capacite_max"]),
+                                Prix = Convert.ToDecimal(reader["Prix"])
+                            };
+
+                            inscriptionDataList.Add(inscriptionData);
                         }
                     }
                 }
@@ -101,13 +110,18 @@ namespace SportAssoASP.Account
                 // Fermer la connexion en dehors du bloc using(SqlCommand...)
                 connection.Close();
             }
+
+            // Lier la liste au GridView
+            MesInscriptions.DataSource = inscriptionDataList;
+            MesInscriptions.DataBind();
+
+            // Remplir les autres informations de l'utilisateur
             string[] userInfo = Adherent.GetUserInfo(userId);
             Nom.Text = userInfo[1];
             Prenom.Text = userInfo[2];
             Email.Text = userInfo[3];
             Tel.Text = userInfo[5];
             Adresse.Text = userInfo[6];
-
         }
 
     }

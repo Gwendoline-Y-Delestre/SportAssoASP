@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <main>
         <div>
+                <asp:Literal runat="server" ID="ErrorMessage" Text="" />
 
             <h1>
                 <asp:Literal runat="server" ID="txtSportName" />
@@ -15,6 +16,8 @@
                             <asp:BoundField DataField="Jour" HeaderText="Jour" SortExpression="Jour" />
                             <asp:BoundField DataField="Heure" HeaderText="Heure" SortExpression="Heure" />
                             <asp:BoundField DataField="Prix" HeaderText="Prix" SortExpression="Prix" />
+                            <asp:BoundField DataField="NomPrenom" HeaderText="Prix" SortExpression="Entraineur" />
+
 
                         </Columns>
                     </asp:GridView>
@@ -24,28 +27,26 @@
 
 
                 <div id="Auth" runat="server" visible="false">
-                    <asp:GridView ID="GridViewActivitesAuth" runat="server" AutoGenerateColumns="False" OnRowCommand="GridViewActivitesAuth_RowCommand">
+                    <asp:GridView ID="GridViewActivitesAuth" runat="server" AutoGenerateColumns="False" OnRowCommand="GridViewActivitesAuth_RowCommand" OnRowDataBound="Inscription_RowDataBound">
                         <Columns>
                             <asp:BoundField DataField="Section" HeaderText="Section" SortExpression="Section" />
                             <asp:BoundField DataField="Jour" HeaderText="Jour" SortExpression="Jour" />
                             <asp:BoundField DataField="Heure" HeaderText="Heure" SortExpression="Heure" />
                             <asp:BoundField DataField="Prix" HeaderText="Prix" SortExpression="Prix" />
-                            <%--<asp:TemplateField HeaderText="Choisir">
+
+                            <asp:BoundField DataField="NomPrenom" HeaderText="Prix" SortExpression="Entraineur" />
+
+                            <asp:TemplateField HeaderText="">
                                 <ItemTemplate>
-                                    <asp:RadioButton ID="RadioButtonChoisir" runat="server" GroupName="SectionGroup" Text="Choisir" CommandName="ChoisirSection" CommandArgument='<%# Eval("ActiviteID") %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>--%>
-                            <asp:TemplateField HeaderText="Actions">
-                                <ItemTemplate>
-                                    <asp:Button runat="server" Text="S'inscrire" CommandName="Inscription" CommandArgument='<%# Eval("ActiviteID") %>' />
+                                    <asp:Button ID="btnSInscrire" Visible="true" runat="server" Text="S'inscrire" CommandName="Inscription" CommandArgument='<%# Eval("ActiviteID") %>' />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
 
 
-
                 </div>
             </div>
+        </div>
     </main>
 </asp:Content>

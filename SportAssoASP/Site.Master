@@ -51,8 +51,8 @@
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul style="display: flex; list-style-type: none; right: 0px;">
-                                <li><a runat="server" href="~/Account/Manage" id="NomLabel" title="Gérer mon compte">Mon Compte  <%: Context.User.Identity.GetUserName()  %> </a></li>
-                                <li>
+                                <li class="btn-nav"><a runat="server" href="~/Account/Manage" id="NomLabel" title="Gérer mon compte">Mon Compte</a></li>
+                                <li class="btn-nav">
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Se déconnecter" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
                             </ul>

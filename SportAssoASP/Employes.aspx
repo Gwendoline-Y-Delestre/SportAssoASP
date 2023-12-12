@@ -8,4 +8,6 @@
 
     </Columns>
 </asp:GridView>
+
+    <a runat="server" href="~/NewEmploye.aspx">Ajouter un employé</a>
 </asp:Content>

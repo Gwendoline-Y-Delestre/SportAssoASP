@@ -25,9 +25,55 @@ namespace SportAssoASP
         string accordPath = null;
         protected void Page_Load(object sender, EventArgs e)
         {
+            int activiteId = int.Parse(Request.QueryString["activiteID"]);
+            int[] nb = nbInscriptionCapMax(activiteId);
 
-            InfoInscription();
+            if (nb[1] >= nb[0])
+            {
+                CapMaxOk.Visible = false;
+                CapMaxDépassé.Visible = true;
+            }else InfoInscription();
 
+        }
+
+        protected int[] nbInscriptionCapMax(int id)
+        {
+            int[] nbInscriptionCapMax = new int[2];
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Ouvrir la connexion
+                connection.Open();
+
+                // Créer une commande SQL avec le paramètre
+                string queryString = "SELECT A.Capacite_max, COUNT(I.InscriptionID) AS NombreInscriptions " +
+                    " FROM Activites A " +
+                    "LEFT JOIN Inscription I ON A.ActiviteID = I.ActiviteID " +
+                    "WHERE A.ActiviteID = @ActiviteID GROUP BY  A.Capacite_max";
+                    
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    // Ajouter le paramètre
+                    command.Parameters.AddWithValue("@ActiviteID", id);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Vous pouvez accéder aux colonnes de la table Adherents ici
+                            nbInscriptionCapMax[0] = int.Parse(reader["Capacite_max"].ToString());
+                            nbInscriptionCapMax[1] = int.Parse(reader["NombreInscriptions"].ToString());
+                           
+                        }
+                    }
+                }
+
+                // Fermer la connexion en dehors du bloc using(SqlCommand...)
+                connection.Close();
+
+
+            }
+            return nbInscriptionCapMax;
         }
         protected void InfoInscription()
         {
@@ -79,6 +125,12 @@ namespace SportAssoASP
             HandleFileUpload(Assurance, StatusLabel1, "assurance");
             HandleFileUpload(Certificat, StatusLabel2, "certificat");
             HandleFileUpload(Accord, StatusLabel3, "accord");
+
+            if (Session["AssurancePath"] == null || Session["CertificatPath"] == null || Session["AccordPath"] == null)
+            {
+                InformationFichier.Text = "Veuillez fournir tous les documents nécessaires avant de procéder au paiement.";
+                return;
+            }
             paiement.Visible = true;
         }
 
@@ -154,7 +206,7 @@ namespace SportAssoASP
             }
             else
             {
-                return InformationFichier.Text = "Vous n'avez pas fourni tout les documents, veillez à les déposer pour examination sur votre espace personnel avant votre 1ère participation";
+                return InformationFichier.Text = "";
             }
         }
         private bool IsImage(string extension)
@@ -169,20 +221,20 @@ namespace SportAssoASP
                 if (long.TryParse(NumeroCarte.Text, out long result1) && NumeroCarte.Text.Length == 16 && int.TryParse(CVC.Text, out int result2) && CVC.Text.Length == 3)
                 {
                     // Vérifiez que les champs contiennent des valeurs non vides
-                    if (!string.IsNullOrEmpty(MoisExpiration.SelectedValue) && !string.IsNullOrEmpty(AnneeExpiration.SelectedValue))
-                    {
+                    //if (!string.IsNullOrEmpty(MoisExpiration.SelectedValue) && !string.IsNullOrEmpty(AnneeExpiration.SelectedValue))
+                    //{
 
                         // Enregistrez les informations dans la base de données
                         EnregistrerDansLaBaseDeDonnees();
 
                         // Affichez un message de réussite
-                        Message.Text = "Inscription effectuée avec avec succès! Veillez à fournir les documents nécessaire si ce n'est pas fait";
-                    }
-                    else
-                    {
-                        // Les valeurs ne sont pas valides, affichez un message d'erreur
-                        Message.Text = "Veuillez remplir tous les champs du formulaire.";
-                    }
+                        Message.Text = "Inscription effectuée avec succès! ";
+                    //}
+                    //else
+                    //{
+                    //    // Les valeurs ne sont pas valides, affichez un message d'erreur
+                    //    Message.Text = "Veuillez remplir tous les champs du formulaire.";
+                    //}
                 }
                 else
                 {

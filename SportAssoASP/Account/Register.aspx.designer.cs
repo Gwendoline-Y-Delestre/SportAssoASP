@@ -105,6 +105,60 @@ namespace SportAssoASP.Account
         protected global::System.Web.UI.WebControls.TextBox ConfirmPassword;
 
         /// <summary>
+        /// Contrôle ContactNom.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContactNom;
+
+        /// <summary>
+        /// Contrôle ContactPrenom.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContactPrenom;
+
+        /// <summary>
+        /// Contrôle ContactTel.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContactTel;
+
+        /// <summary>
+        /// Contrôle lblError2.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal lblError2;
+
+        /// <summary>
+        /// Contrôle ContactEmail.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ContactEmail;
+
+        /// <summary>
+        /// Contrôle Relation.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Relation;
+
+        /// <summary>
         /// Contrôle chkAccepterConditions.
         /// </summary>
         /// <remarks>

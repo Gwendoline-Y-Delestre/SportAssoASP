@@ -39,19 +39,14 @@ namespace SportAssoASP.Account
                         //case SignInStatus.LockedOut:
                         //    Response.Redirect("/Account/Lockout");
                         //    break;
-                        //case SignInStatus.RequiresVerification:
-                        //    Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
-                        //                                    Request.QueryString["ReturnUrl"],
-                        //                                    RememberMe.Checked),
-                        //                      true);
-                        //    break;
                         case SignInStatus.Failure:
                         default:
                             FailureText.Text = "Tentative de connexion non valide";
                             ErrorMessage.Visible = true;
                             break;
                     }
-                }else
+                }
+                else
                 {
                     switch (result)
                     {
@@ -61,12 +56,6 @@ namespace SportAssoASP.Account
                         case SignInStatus.LockedOut:
                             Response.Redirect("/Account/Lockout");
                             break;
-                        //case SignInStatus.RequiresVerification:
-                        //    Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
-                        //                                    Request.QueryString["ReturnUrl"],
-                        //                                    RememberMe.Checked),
-                        //                      true);
-                        //    break;
                         case SignInStatus.Failure:
                         default:
                             FailureText.Text = "Tentative de connexion non valide";

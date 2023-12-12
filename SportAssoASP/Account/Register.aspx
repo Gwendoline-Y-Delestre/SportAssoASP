@@ -76,17 +76,60 @@
                     CssClass="text-danger" Display="Dynamic" ErrorMessage="Le mot de passe et le mot de passe de confirmation ne correspondent pas." />
             </div>
         </div>
+
+        <div>
+            <p>Contact d'urgence</p>
+            <div>
+                <asp:Label runat="server">Nom :</asp:Label>
+                <div>
+                    <asp:TextBox runat="server" ID="ContactNom" />
+
+                </div>
+            </div>
+            <div>
+                <asp:Label runat="server">Prénom :</asp:Label>
+                <div>
+                    <asp:TextBox runat="server" ID="ContactPrenom" />
+
+                </div>
+            </div>
+            <div>
+                <asp:Label runat="server">Téléphone :</asp:Label>
+                <div>
+                    <asp:TextBox runat="server" ID="ContactTel" />
+
+                </div>
+                <p class="text-danger">
+                    <asp:Literal runat="server" ID="lblError2" />
+                </p>
+            </div>
+            <div>
+                <asp:Label runat="server">Email</asp:Label>
+                <div>
+                    <asp:TextBox runat="server" ID="ContactEmail" />
+                </div>
+            </div>
+            <div>
+                <asp:Label runat="server" AssociatedControlID="Relation">Relation :</asp:Label>
+                <asp:DropDownList ID="Relation" runat="server">
+                    <asp:ListItem Text="Mère" Value="mere" />
+                    <asp:ListItem Text="Père" Value="pere" />
+                    <asp:ListItem Text="Tuteur Légal" Value="tuteur" />
+                    <asp:ListItem Text="Autre" Value="autre" />
+                </asp:DropDownList>
+            </div>
+            
+        </div>
         <div>
             <input type="checkbox" runat="server" id="chkAccepterConditions" />
             <label class="form-check-label" for="chkAccepterConditions">J'accepte les conditions d'utilisation</label>
             <%--<asp:CustomValidator runat="server" ID="cvAccepterConditions"
                 CssClass="text-danger" Display="Dynamic" ErrorMessage=""
                 OnServerValidate="cvAccepterConditions_ServerValidate" />--%>
-            
         </div>
         <div class="row">
             <div class="offset-md-2 col-md-10">
-                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Inscrire" CssClass="btn btn-outline-dark" CausesValidation="True" />
+                <asp:Button runat="server" OnClick="CreateUser_Click" Text="S'Inscrire" CssClass="btn btn-outline-dark" CausesValidation="True" />
             </div>
         </div>
     </main>

@@ -78,6 +78,6 @@
     <%--<asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/Scripts/bootstrap.js") %>
     </asp:PlaceHolder>--%>
-    <script src="Scripts/main.js"></script>
+    <script src="Scripts/admin.js"></script>
 </body>
 </html>

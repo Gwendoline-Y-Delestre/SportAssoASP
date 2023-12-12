@@ -15,6 +15,24 @@ namespace SportAssoASP
     {
 
         /// <summary>
+        /// Contrôle CapMaxDépassé.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CapMaxDépassé;
+
+        /// <summary>
+        /// Contrôle CapMaxOk.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CapMaxOk;
+
+        /// <summary>
         /// Contrôle RecapJour.
         /// </summary>
         /// <remarks>

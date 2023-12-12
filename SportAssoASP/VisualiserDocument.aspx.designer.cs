@@ -11,25 +11,25 @@ namespace SportAssoASP
 {
 
 
-    public partial class Activites
+    public partial class VisualiserDocument
     {
 
         /// <summary>
-        /// Contrôle ErreurMessage.
+        /// Contrôle ImageViewer.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ErreurMessage;
+        protected global::System.Web.UI.WebControls.Image ImageViewer;
 
         /// <summary>
-        /// Contrôle GridActivites.
+        /// Contrôle PdfViewer.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataGrid GridActivites;
+        protected global::System.Web.UI.HtmlControls.HtmlIframe PdfViewer;
     }
 }

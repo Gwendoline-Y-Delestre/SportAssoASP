@@ -11,61 +11,88 @@ namespace SportAssoASP
 {
 
 
-    public partial class InfoSport
+    public partial class NewActivite
     {
 
         /// <summary>
-        /// Contrôle ErrorMessage.
+        /// Contrôle lblErreur.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
+        protected global::System.Web.UI.WebControls.Label lblErreur;
 
         /// <summary>
-        /// Contrôle txtSportName.
+        /// Contrôle NewSport.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal txtSportName;
+        protected global::System.Web.UI.WebControls.DropDownList NewSport;
 
         /// <summary>
-        /// Contrôle UnAuth.
+        /// Contrôle NewSection.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UnAuth;
+        protected global::System.Web.UI.WebControls.DropDownList NewSection;
 
         /// <summary>
-        /// Contrôle GridViewActivites.
+        /// Contrôle NewJour.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewActivites;
+        protected global::System.Web.UI.WebControls.DropDownList NewJour;
 
         /// <summary>
-        /// Contrôle Auth.
+        /// Contrôle NewHeure.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Auth;
+        protected global::System.Web.UI.WebControls.DropDownList NewHeure;
 
         /// <summary>
-        /// Contrôle GridViewActivitesAuth.
+        /// Contrôle Prix.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewActivitesAuth;
+        protected global::System.Web.UI.WebControls.TextBox Prix;
+
+        /// <summary>
+        /// Contrôle CapaciteMax.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CapaciteMax;
+
+        /// <summary>
+        /// Contrôle NewEmploye.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList NewEmploye;
+
+        /// <summary>
+        /// Contrôle NewActiviteCreer.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button NewActiviteCreer;
     }
 }

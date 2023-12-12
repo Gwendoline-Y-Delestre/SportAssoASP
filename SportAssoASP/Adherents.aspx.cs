@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,49 +15,13 @@ namespace SportAssoASP
         protected void Page_Load(object sender, EventArgs e)
         {
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-            //// Créer une connexion à la base de données
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    // Ouvrir la connexion
-            //    connection.Open();
-
-            //    // Créer une commande SQL avec le paramètre
-            //    string queryString = "SELECT Nom, Prenom, Date_naissance, Email, Tel, Adresse  FROM Adherents";
-            //    using (SqlCommand command = new SqlCommand(queryString, connection))
-            //    {
-            //        // Vérifier si des données ont été renvoyées
-            //        using (SqlDataReader reader = command.ExecuteReader())
-            //        {
-            //            if (reader.Read())
-            //            {
-            //                GridViewAdherents.DataSource = reader;
-            //                GridViewAdherents.DataBind();
-            //            }
-            //        }
-
-
-            //    }
-            //    connection.Close();
-
-            // Appeler la méthode pour récupérer les informations
-            //string[] inscriptions = AdherentsAdmin.GetInscriptionInfo();
-
-            //// Vérifier si des données ont été récupérées
-            //if (inscriptions != null && inscriptions.Length > 0)
-            //{
-            //    // Lier les données au GridView
-            //    GridViewAdherentsInscriptions.DataSource = new string[][] { inscriptions };
-            //    GridViewAdherentsInscriptions.DataBind();
-            //}
-
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 // Ouvrir la connexion
                 connection.Open();
 
                 // Créer une commande SQL avec le paramètre
-                string queryString = "SELECT I.InscriptionID, A.Nom AS AdherentNom, A.Prenom AS AdherentPrenom, A.Date_naissance AS AdherentDateNaissance," +
+                string queryString = "SELECT I.InscriptionID AS InscriptionID, A.Nom AS AdherentNom, A.Prenom AS AdherentPrenom, A.Date_naissance AS AdherentDateNaissance," +
                 " A.Email AS AdherentEmail, AC.Nom AS ContactUrgenceNom, AC.Prenom AS ContactUrgencePrenom, AC.Email AS ContactUrgenceEmail," +
                 " AC.Tel AS ContactUrgenceTel, AC.Relation AS ContactUrgenceRelation, Act.Sport AS ActiviteSport, Act.Section AS ActiviteSection," +
                 " Act.Jour AS ActiviteJour, Act.Heure AS ActiviteHeure, Act.Capacite_max AS ActiviteCapaciteMax, Act.Prix AS ActivitePrix," +
@@ -81,6 +46,54 @@ namespace SportAssoASP
                 connection.Close();
             }
 
+            //GridViewAdherentsInscriptions.RowCommand += GridViewAdherentsInscriptions_RowCommand;
+
+        }
+        protected void DocView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "AssuranceView")
+            {
+                // Récupérer l'identifiant de l'activité sélectionnée
+                string AssurancePath = e.CommandArgument.ToString();
+                    // Rediriger vers la page de téléchargement de documents avec l'identifiant de l'activité
+                Response.Redirect("file:///"+AssurancePath);
+                
+            }
+        }
+        protected string GetDocumentPathFromDatabase(int documentID)
+        {
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+            string documentPath = null;
+
+            // Remplacez "VotreRequeteSQL" par la requête SQL appropriée pour récupérer le chemin d'accès du document
+            string query = "SELECT AssurancePath FROM Inscription WHERE InscriptionID = @InscriptionID";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@InscriptionID", documentID);
+
+                    connection.Open();
+                    documentPath = (string)command.ExecuteScalar();
+                }
+            }
+
+            return documentPath;
+        }
+
+        protected string GetEncodedDocumentPathFromDatabase(int documentID)
+        {
+            string documentPath = GetDocumentPathFromDatabase(documentID);
+
+            // Assurez-vous que le chemin d'accès est non null avant de l'encoder
+            if (!string.IsNullOrEmpty(documentPath))
+            {
+                return Server.UrlEncode(documentPath);
+            }
+
+            return string.Empty;
         }
     }
 }

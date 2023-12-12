@@ -11,61 +11,61 @@ namespace SportAssoASP
 {
 
 
-    public partial class InfoSport
+    public partial class NewEmploye
     {
 
         /// <summary>
-        /// Contrôle ErrorMessage.
+        /// Contrôle lblErreur.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
+        protected global::System.Web.UI.WebControls.Label lblErreur;
 
         /// <summary>
-        /// Contrôle txtSportName.
+        /// Contrôle Nom.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal txtSportName;
+        protected global::System.Web.UI.WebControls.TextBox Nom;
 
         /// <summary>
-        /// Contrôle UnAuth.
+        /// Contrôle Prenom.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UnAuth;
+        protected global::System.Web.UI.WebControls.TextBox Prenom;
 
         /// <summary>
-        /// Contrôle GridViewActivites.
+        /// Contrôle BirthDate.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewActivites;
+        protected global::System.Web.UI.WebControls.TextBox BirthDate;
 
         /// <summary>
-        /// Contrôle Auth.
+        /// Contrôle Email.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Auth;
+        protected global::System.Web.UI.WebControls.TextBox Email;
 
         /// <summary>
-        /// Contrôle GridViewActivitesAuth.
+        /// Contrôle NewEmployeCreer.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewActivitesAuth;
+        protected global::System.Web.UI.WebControls.Button NewEmployeCreer;
     }
 }
